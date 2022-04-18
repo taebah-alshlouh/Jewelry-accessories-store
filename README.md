@@ -1,0 +1,1 @@
+# Jewelry-accessories-store
