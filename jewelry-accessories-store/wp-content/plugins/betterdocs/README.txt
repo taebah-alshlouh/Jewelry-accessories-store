@@ -5,7 +5,7 @@ Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, know
 Requires at least: 4.0
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 2.0.12
+Stable tag: 2.0.13
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -174,6 +174,10 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 2.0.13 - 19/04/2022 = 
+- Added: BetterDocs default order option for the Gutenberg blocks
+- Few minor bug fixes & improvements
 
 = 2.0.12 - 07/04/2022 = 
 - Fixed: Fatal error if a default WordPress user role doesn't exist

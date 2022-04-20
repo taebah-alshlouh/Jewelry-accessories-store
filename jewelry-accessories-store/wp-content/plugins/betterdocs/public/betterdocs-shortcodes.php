@@ -272,6 +272,7 @@ function betterdocs_category_grid($atts, $content = null)
 					$uncategorised_tax_query = '';
 					$args['tax_query'] = apply_filters('betterdocs_kb_uncategorised_tax_query', $uncategorised_tax_query, $wp_query);
                     $args = apply_filters('betterdocs_articles_args', $args);
+					$args = apply_filters('betterdocs_uncategorized_args', $args);
 					$post_query = new WP_Query($args);
 					if ($post_query->have_posts()) :
 						echo '<ul>';
@@ -325,7 +326,7 @@ function betterdocs_category_grid($atts, $content = null)
 					<a href="#">' . $sub_category->name . '</a></span>';
 
 				echo '<ul class="' . esc_attr($subcat_class) . '">';
-				$sub_args = BetterDocs_Helper::list_query_arg($post_type, $multiple_kb, $sub_category->slug,  $nested_posts_num, $docs_orderby, $docs_order, $kb_slug);
+				$sub_args = BetterDocs_Helper::list_query_arg($post_type, $multiple_kb, $sub_category->slug, $nested_posts_num, $docs_orderby, $docs_order, $kb_slug);
 				$sub_args = apply_filters('betterdocs_articles_args', $sub_args, $sub_category->term_id);
 				$sub_post_query = new WP_Query($sub_args);
 

@@ -72,20 +72,21 @@ function betterdocs_settings_args(){
                 ),
             )
         ),
-        'internal_kb_section' => array(
-            'title' => __('Internal Knowledge Base', 'betterdocs'),
-            'priority'    => 0,
-            'fields' => array(
+        'internal_kb_section' =>  array(
+            'title' => __('Internal Knowledge Base', 'betterdocs-pro'),
+            'priority'    => 1,
+            'fields' => apply_filters( 'betterdocs_internal_kb_fields', array(
                 'content_restriction_title' => array(
                     'type'        => 'title',
-                    'label'       => __('Internal Knowledge Base', 'betterdocs'),
+                    'label'       => __('Internal Knowledge Base', 'betterdocs-pro'),
+                    'disable'     => true,
                     'priority'    => 0,
                 ),
-                'enable_content_restriction_free' => array(
+                'enable_content_restriction' => array(
                     'type'      => 'checkbox',
+                    'disable'    => true,
                     'priority'  => 1,
-                    'disable' => true,
-                    'label'     => __( 'Enable/Disable', 'betterdocs' ),
+                    'label'     => __( 'Enable/Disable', 'betterdocs-pro' ),
                     'default'   => '',
                     'dependency' => array(
                         1 => array(
@@ -93,10 +94,49 @@ function betterdocs_settings_args(){
                         )
                     )
                 ),
-            )
+                'content_visibility' => array(
+                    'type'        => 'select',
+                    'label'       => __('Restrict Access to', 'betterdocs-pro'),
+                    'help'        => __('<strong>Note:</strong> Only selected User Roles will be able to view your Knowledge Base' , 'betterdocs-pro'),
+                    'disable'     => true,
+                    'priority'    => 2,
+                    'multiple'    => true,
+                    'default'     => 'all',
+                    'options'     => BetterDocs_Settings::get_all_user_roles()
+                ),
+                'restrict_template' => array(
+                    'type'        => 'select',
+                    'label'       => __('Restriction on Docs', 'betterdocs-pro'),
+                    'help'        => __('<strong>Note:</strong> Selected Docs pages will be restricted' , 'betterdocs-pro'),
+                    'disable'     => true,
+                    'priority'    => 3,
+                    'multiple'    => true,
+                    'default'     => 'all',
+                    'options'     => BetterDocs_Settings::get_texanomy()
+                ),
+                'restrict_category' => array(
+                    'type'        => 'select',
+                    'label'       => __('Restriction on Docs Categories', 'betterdocs-pro'),
+                    'help'        => __('<strong>Note:</strong> Selected Docs categories will be restricted ' , 'betterdocs-pro'),
+                    'disable'     => true,
+                    'priority'    => 5,
+                    'multiple'    => true,
+                    'default'     => 'all',
+                    'options'     => BetterDocs_Settings::get_terms_list('doc_category')
+                ),
+                'restricted_redirect_url' => array(
+                    'type'        => 'text',
+                    'label'       => __('Redirect URL' , 'betterdocs-pro'),
+                    'help'        => __('<strong>Note:</strong> Set a custom URL to redirect users without permissions when they try to access internal knowledge base. By default, restricted content will redirect to the "404 not found" page' , 'betterdocs-pro'),
+                    'default'     => '',
+                    'placeholder' => 'https://',
+                    'disable'     => true,
+                    'priority'	  => 6,
+                ),
+            ))
         )
     ));
-    if( ! current_user_can('delete_users') ) {
+    if( ! current_user_can('activate_plugins') ) {
         unset($advanced_settings['role_management_section']);
     }
     return apply_filters('betterdocs_settings_tab', array(

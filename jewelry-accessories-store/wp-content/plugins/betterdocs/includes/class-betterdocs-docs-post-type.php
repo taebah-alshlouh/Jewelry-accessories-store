@@ -751,6 +751,13 @@ class BetterDocs_Docs_Post_Type
         if (is_array($rules)) {
             $rules = implode('', $rules);
         }
+
+        if( ! is_plugin_active( 'betterdocs-pro/betterdocs-pro.php' ) ) {
+            if (strpos($rules, 'knowledge_base') !== false) {
+                flush_rewrite_rules();
+            }
+        }
+
         if (!strpos($rules, 'docs')) {
             flush_rewrite_rules();
         }

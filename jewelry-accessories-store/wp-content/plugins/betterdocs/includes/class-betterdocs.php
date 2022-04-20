@@ -81,7 +81,9 @@ class BetterDocs
 		$this->start_plugin_tracking();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-		new Betterdocs_Role_Management_Lite();
+        if (is_admin()) {
+            new Betterdocs_Role_Management_Lite();
+        }
 		add_action('admin_init', array($this, 'redirect'));
 		add_action('wp_ajax_optin_wizard_action_betterdocs', array($this, 'wizard_action'));
 	}
